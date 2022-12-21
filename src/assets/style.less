@@ -1,4 +1,27 @@
+@gap: 14px;
+
 body {
-    padding: 0;
-    margin: 0;
+    background: white;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: rgb(16, 16, 20);
+    }
+}
+
+.padding {
+    padding: @gap;
+}
+
+.margin {
+    margin: @gap;
+}
+
+.container {
+    overflow-y: auto;
+    height: 100%;
+    position: absolute;
+    width: auto;
+    padding-bottom: 100px;
 }

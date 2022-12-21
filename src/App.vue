@@ -7,6 +7,7 @@ import {
   dateZhCN,
   darkTheme,
 } from "naive-ui"
+import ThemeConfig from "./theme"
 
 const osThemeRef = useOsTheme()
 const theme = computed(() => (osThemeRef.value === "dark" ? darkTheme : null))

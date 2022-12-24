@@ -9,6 +9,10 @@ import {
   PersonCircle20Filled,
   PersonCircle20Regular,
 } from "@vicons/fluent"
+import Safari from "@/assets/appleIcon/Safari.vue"
+import SafariFill from "@/assets/appleIcon/SafariFill.vue"
+import Personal from "@/assets/appleIcon/Personal.vue"
+import PersonalFill from "@/assets/appleIcon/PersonalFill.vue"
 const route = useRoute()
 const theme = useThemeVars()
 </script>
@@ -26,12 +30,12 @@ const theme = useThemeVars()
       <Home20Regular v-else />
     </n-icon>
     <n-icon :size="30" @click="$router.push('/discover')">
-      <Iot20Filled v-if="route.path === '/discover'" />
-      <Iot20Regular v-else />
+      <SafariFill v-if="route.path === '/discover'" />
+      <Safari v-else />
     </n-icon>
     <n-icon :size="30" @click="$router.push('/user')">
-      <PersonCircle20Filled v-if="route.path === '/user'" />
-      <PersonCircle20Regular v-else />
+      <PersonalFill v-if="route.path === '/user'" />
+      <Personal v-else />
     </n-icon>
   </n-space>
 </template>

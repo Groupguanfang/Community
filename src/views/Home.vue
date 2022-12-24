@@ -4,13 +4,13 @@ import Footer from "@/components/common/Footer.vue"
 </script>
 
 <template>
-  <n-space class="margin">
+  <n-space id="home" class="margin">
     <n-space vertical :size="0">
       <Footer />
-      <n-text depth="3">
+      <n-text strong depth="3">
         {{ new Date().getMonth() }}月{{ new Date().getDate() }}日
       </n-text>
-      <n-h1 style="margin-top: 0; margin-bottom: 0">心电社区</n-h1>
+      <n-h1 strong style="margin-top: 0; margin-bottom: 0;font-weight: bold">心电社区</n-h1>
     </n-space>
     <n-carousel autoplay class="ppt">
       <img
@@ -31,25 +31,25 @@ import Footer from "@/components/common/Footer.vue"
       <n-gi @click="$router.push('/apps/bilibili')">
         <n-space :size="0" justify="center">
           <img src="//static.light.xhhzs.cn/public/bili.png" />
-          <n-text>腕上B站</n-text>
+          <n-text>B站</n-text>
         </n-space>
       </n-gi>
       <n-gi>
         <n-space :size="0" justify="center">
           <img src="//static.light.xhhzs.cn/public/novel.png" />
-          <n-text>腕上小说</n-text>
+          <n-text>小说</n-text>
         </n-space>
       </n-gi>
       <n-gi>
         <n-space :size="0" justify="center">
           <img src="//static.light.xhhzs.cn/public/news.png" />
-          <n-text>腕上资讯</n-text>
+          <n-text>资讯</n-text>
         </n-space>
       </n-gi>
       <n-gi>
         <n-space :size="0" justify="center">
           <img src="//static.light.xhhzs.cn/public/netease.jpeg" />
-          <n-text>腕上音乐</n-text>
+          <n-text>音乐</n-text>
         </n-space>
       </n-gi>
     </n-grid>
@@ -64,12 +64,24 @@ import Footer from "@/components/common/Footer.vue"
 }
 .ppt {
   border-radius: 9px;
+  box-shadow: var(--shadow);
+  transition: ease 0.2s;
+}
+.ppt:active {
+  box-shadow: none;
+  transition: ease 0.2s;
 }
 .App {
   margin-top: 10px;
   img {
     border-radius: 9px;
     width: 100%;
+    box-shadow: var(--shadow);
+    transition: ease 0.2s;
+  }
+  img:active {
+    transition: ease 0.2s;
+    box-shadow: none;
   }
 }
 </style>

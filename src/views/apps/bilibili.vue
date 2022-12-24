@@ -145,8 +145,8 @@ import SoundWaveCircle24Regular from "@vicons/fluent/SoundWaveCircle24Regular"
 </script>
 
 <script lang="ts">
-import { GetApp } from "../../../Api"
-import { openBili, copyToClip } from "../../Utils/Active"
+import { GetApp } from "lightning-community"
+import { openBili, copyToClip } from "@/utils/Active"
 const isIos: boolean = /ipad|iPhone/i.test(window.navigator.userAgent)
 export default {
   data() {

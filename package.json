@@ -9,7 +9,7 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "format": "prettier --config .prettierrc.js --write * "
+    "format": "prettier --config .prettierrc.json --write * "
   },
   "author": {
     "name": "Zero",
@@ -40,6 +40,7 @@
     "@vicons/fluent": "^0.12.0",
     "axios": "^1.2.1",
     "clipboard-copy": "^4.0.1",
+    "eruda": "^2.9.1",
     "less": "^4.1.3",
     "lightning-community": "latest",
     "md-editor-v3": "^2.6.0",

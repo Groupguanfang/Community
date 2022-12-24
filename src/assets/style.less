@@ -1,27 +1,31 @@
-@gap: 14px;
+@gap: 6%;
+:root {
+  --gap: @gap;
+  --shadow: 0 10px 20px #88888850;
+}
 
 body {
-    background: white;
+  background: white;
 }
 
 @media (prefers-color-scheme: dark) {
-    body {
-        background: rgb(16, 16, 20);
-    }
+  body {
+    background: rgb(16, 16, 20);
+  }
 }
 
 .padding {
-    padding: @gap;
+  padding: @gap;
 }
 
 .margin {
-    margin: @gap;
+  margin: @gap;
 }
 
 .container {
-    overflow-y: auto;
-    height: 100%;
-    position: absolute;
-    width: auto;
-    padding-bottom: 100px;
+  overflow-y: auto;
+  height: 100%;
+  position: absolute;
+  width: auto;
+  padding-bottom: 100px;
 }

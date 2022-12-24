@@ -86,7 +86,7 @@ import Footer from "@/components/common/Footer.vue"
     transition: ease 0.2s;
     box-shadow: none;
     transition: var(--tranIn);
-    transform: scale(0.95);
+    transform: scale(0.9);
   }
 }
 </style>

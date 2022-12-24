@@ -36,6 +36,7 @@ onMounted(async () => {
         :title="item.authorData.name"
       >
         {{ item.data }}
+        <template #description> 管理员 </template>
       </lister>
     </n-list>
   </div>

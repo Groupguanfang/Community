@@ -28,9 +28,14 @@ const router = createRouter({
       name: "bilibili",
       component: () => import("@/views/apps/bilibili.vue"),
     },
+    {
+      path: "/user/login",
+      name: "login",
+      component: () => import("@/views/user/Login.vue"),
+    },
   ],
 })
 
-router.beforeEach(() => {})
+router.beforeEach((to, from, next) => {})
 
 export default router

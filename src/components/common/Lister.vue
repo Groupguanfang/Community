@@ -12,6 +12,7 @@ import {
 export default {
   props: {
     title: String,
+    description: String,
   },
 }
 </script>
@@ -25,6 +26,9 @@ export default {
             <Person20Regular />
           </n-icon>
         </n-avatar>
+      </template>
+      <template #description>
+        <slot name="description" />
       </template>
       <slot />
       <template #action>

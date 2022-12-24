@@ -1,17 +1,8 @@
 @gap: 6%;
+
 :root {
   --gap: @gap;
   --shadow: 0 10px 20px #88888850;
-}
-
-body {
-  background: white;
-}
-
-@media (prefers-color-scheme: dark) {
-  body {
-    background: rgb(16, 16, 20);
-  }
 }
 
 .padding {
@@ -28,4 +19,18 @@ body {
   position: absolute;
   width: auto;
   padding-bottom: 100px;
+}
+
+body {
+  background: white;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: rgb(16, 16, 20);
+  }
+
+  :root {
+    --shadow: 0 10px 20px #33333350;
+  }
 }

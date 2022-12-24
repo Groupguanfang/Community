@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup>
 import { NButton, NH1, NList, NSpace, NIcon } from "naive-ui"
 import Footer from "@/components/common/Footer.vue"
 import { ref, onMounted, type Ref } from "vue"
@@ -6,16 +6,17 @@ import { Get, GetUserInfoByGuest } from "lightning-community"
 import { Add20Filled } from "@vicons/fluent"
 import lister from "@/components/common/Lister.vue"
 
-const data: Ref<Array<any>> = ref([])
+const data: Ref = ref([])
+
 onMounted(async () => {
   const req = await Get("topic")
   for (let i = 0; i < req.data.length; i++) {
     const authorData = await GetUserInfoByGuest(req.data[i].author)
     req.data[i].authorData = authorData.data
   }
-  data.value = <Array<any>>req.data
+  data.value = req.data
 })
-</script>
+</scrip>
 
 <template>
   <div id="discover" class="margin">
@@ -40,5 +41,4 @@ onMounted(async () => {
   </div>
 </template>
 
-<style lang="less" scoped>
-</style>
+<style lang="less" scoped></style>

@@ -123,7 +123,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import {
   NModal,
   NSpin,
@@ -137,17 +137,21 @@ import {
   NCollapseItem,
   NSteps,
   NStep,
+  useMessage,
+  useDialog,
 } from "naive-ui"
 import PlayCircle20Filled from "@vicons/fluent/PlayCircle20Filled"
 import CloudDownload from "@vicons/fluent/CloudArrowDown16Regular"
 import Video20Regular from "@vicons/fluent/Video20Regular"
 import SoundWaveCircle24Regular from "@vicons/fluent/SoundWaveCircle24Regular"
+const $message = useMessage()
+const $dialog = useDialog()
 </script>
 
-<script lang="ts">
+<script>
 import { GetApp } from "lightning-community"
 import { openBili, copyToClip } from "@/utils/Active"
-const isIos: boolean = /ipad|iPhone/i.test(window.navigator.userAgent)
+const isIos = /ipad|iPhone/i.test(window.navigator.userAgent)
 export default {
   data() {
     return {
@@ -172,7 +176,7 @@ export default {
     },
     // 激活
     async activitive() {
-      const redict: Function = () => {
+      const redict = () => {
         this.showModal = true
         openBili("watchrss://")
       }
@@ -196,8 +200,8 @@ export default {
       this.type = "bilibili"
       document.title = "腕上B站"
       const data = await GetApp("bilibili")
-      this.data = data.data.data
-      this.method1 = data.data.data.methods
+      this.data = data.data
+      this.method1 = data.data.methods
     }
   },
 }

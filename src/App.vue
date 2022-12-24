@@ -6,6 +6,8 @@ import {
   useOsTheme,
   dateZhCN,
   darkTheme,
+  NMessageProvider,
+  NDialogProvider,
 } from "naive-ui"
 import ThemeConfig from "./theme"
 
@@ -20,10 +22,14 @@ const theme = computed(() => (osThemeRef.value === "dark" ? darkTheme : null))
     :theme="theme"
     :theme-overrides="ThemeConfig"
   >
-    <router-view v-slot="{ Component }">
-      <transition appear mode="out-in">
-        <component :is="Component" />
-      </transition>
-    </router-view>
+    <n-message-provider>
+      <n-dialog-provider>
+        <router-view v-slot="{ Component }">
+          <transition appear mode="out-in">
+            <component :is="Component" />
+          </transition>
+        </router-view>
+      </n-dialog-provider>
+    </n-message-provider>
   </n-config-provider>
 </template>

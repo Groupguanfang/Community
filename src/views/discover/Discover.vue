@@ -22,7 +22,7 @@ onMounted(async () => {
   <div id="discover" class="margin">
     <Footer />
     <n-space align="center" justify="space-between">
-      <n-h1 style="margin-top: 20px">发现</n-h1>
+      <n-h1 style="margin-top: 20px; margin-bottom: 19.5px">发现</n-h1>
       <n-button secondary type="primary" circle>
         <n-icon>
           <Add20Filled />

@@ -1,14 +1,7 @@
 <script setup lang="ts">
 import { useThemeVars, NSpace, NIcon } from "naive-ui"
 import { useRoute } from "vue-router"
-import {
-  Home20Filled,
-  Home20Regular,
-  Iot20Filled,
-  Iot20Regular,
-  PersonCircle20Filled,
-  PersonCircle20Regular,
-} from "@vicons/fluent"
+import { Home20Filled, Home20Regular } from "@vicons/fluent"
 import Safari from "@/assets/appleIcon/Safari.vue"
 import SafariFill from "@/assets/appleIcon/SafariFill.vue"
 import Personal from "@/assets/appleIcon/Personal.vue"
@@ -48,6 +41,7 @@ const theme = useThemeVars()
   padding-top: 16px;
   padding-bottom: 8px;
   left: 0;
+  box-shadow: var(--shadowTop);
 }
 @media (prefers-color-scheme: dark) {
   #footer {

@@ -26,7 +26,7 @@
         <n-space justify="center">
           <n-spin size="large" />
           <div class="tip">正在跳转到App，请确保您已经成功安装腕上RSS...</div>
-          <n-button @click="re" text type="primary">
+          <n-button @click="openBili('watchrss://')" text type="primary">
             如果没有跳转请点击这里
           </n-button>
         </n-space>
@@ -140,12 +140,34 @@ import {
   useMessage,
   useDialog,
 } from "naive-ui"
+import { ref } from "vue"
 import PlayCircle20Filled from "@vicons/fluent/PlayCircle20Filled"
 import CloudDownload from "@vicons/fluent/CloudArrowDown16Regular"
 import Video20Regular from "@vicons/fluent/Video20Regular"
 import SoundWaveCircle24Regular from "@vicons/fluent/SoundWaveCircle24Regular"
-const $message = useMessage()
-const $dialog = useDialog()
+const message = useMessage()
+const dialog = useDialog()
+
+const showModal = ref(false)
+async function activitive() {
+  const redict = () => {
+    showModal.value = true
+    openBili("watchrss://")
+  }
+  copyToClip(() => {
+    if (!isIos) {
+      dialog.warning({
+        title: "警告",
+        content: "检测到似乎是非iPhone，可能会无法激活",
+        positiveText: "确定",
+        negativeText: "取消",
+        onPositiveClick: redict,
+      })
+    } else {
+      redict()
+    }
+  })
+}
 </script>
 
 <script>
@@ -158,42 +180,9 @@ export default {
       data: {
         title: "加载中",
       },
-      showModal: false,
       method1: [],
       type: "加载中",
     }
-  },
-  methods: {
-    // 跳转到腕B
-    re() {
-      copyToClip(() => {
-        try {
-          openBili("watchrss://")
-        } catch (err) {
-          this.$message.error("打开失败")
-        }
-      })
-    },
-    // 激活
-    async activitive() {
-      const redict = () => {
-        this.showModal = true
-        openBili("watchrss://")
-      }
-      copyToClip(() => {
-        if (!isIos) {
-          this.$dialog.warning({
-            title: "警告",
-            content: "检测到似乎是非iPhone，可能会无法激活",
-            positiveText: "确定",
-            negativeText: "取消",
-            onPositiveClick: redict,
-          })
-        } else {
-          redict()
-        }
-      })
-    },
   },
   async mounted() {
     if (this.$route.params.e == "bilibili") {

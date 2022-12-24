@@ -10,9 +10,11 @@ import Footer from "@/components/common/Footer.vue"
       <n-text strong depth="3">
         {{ new Date().getMonth() }}月{{ new Date().getDate() }}日
       </n-text>
-      <n-h1 strong style="margin-top: 0; margin-bottom: 0;font-weight: bold">心电社区</n-h1>
+      <n-h1 strong style="margin-top: 0; margin-bottom: 0; font-weight: bold">
+        心电社区
+      </n-h1>
     </n-space>
-    <n-carousel autoplay class="ppt">
+    <n-carousel draggable show-arrow autoplay class="ppt">
       <img
         class="carousel-img"
         src="//static.light.xhhzs.cn/public/poster.jpeg"
@@ -65,11 +67,12 @@ import Footer from "@/components/common/Footer.vue"
 .ppt {
   border-radius: 9px;
   box-shadow: var(--shadow);
-  transition: ease 0.2s;
+  transition: var(--tranOut);
 }
 .ppt:active {
   box-shadow: none;
-  transition: ease 0.2s;
+  transition: var(--tranIn);
+  transform: scale(0.95);
 }
 .App {
   margin-top: 10px;
@@ -77,11 +80,13 @@ import Footer from "@/components/common/Footer.vue"
     border-radius: 9px;
     width: 100%;
     box-shadow: var(--shadow);
-    transition: ease 0.2s;
+    transition: var(--tranOut);
   }
   img:active {
     transition: ease 0.2s;
     box-shadow: none;
+    transition: var(--tranIn);
+    transform: scale(0.95);
   }
 }
 </style>

@@ -49,9 +49,25 @@ async function LoginAction() {
       placeholder="请输入密码"
       size="large"
     />
-    <n-button :loading="loading" type="primary" block @click="LoginAction">
+    <n-button
+      :loading="loading"
+      size="large"
+      type="primary"
+      block
+      @click="LoginAction"
+    >
       登录
     </n-button>
+    <div style="display: flex; gap: var(--gap)">
+      <n-button
+        block
+        style="width: 47%"
+        @click="$router.push('/user/register')"
+      >
+        注册
+      </n-button>
+      <n-button block style="width: 47%">找回密码</n-button>
+    </div>
   </n-space>
 </template>
 

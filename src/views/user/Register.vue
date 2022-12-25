@@ -5,6 +5,7 @@ import { useCommon } from "@/stores/Common"
 import { empty } from "@/utils/Empty"
 import { Register, PostUserMailCode } from "lightning-community"
 import { NSpace, NInput, NButton, NInputGroup, useMessage } from "naive-ui"
+import LoginRegister from "@/components/user/Login&Register.vue"
 const message = useMessage()
 const router = useRouter()
 const common = useCommon()
@@ -102,6 +103,7 @@ async function RegisterAction() {
     <n-button block type="primary" :loading="loading" @click="RegisterAction">
       注册
     </n-button>
+    <LoginRegister />
   </n-space>
 </template>
 

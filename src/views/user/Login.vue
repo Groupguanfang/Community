@@ -4,6 +4,7 @@ import { NInput, NSpace, NButton, useMessage } from "naive-ui"
 import { Login } from "lightning-community"
 import { useCommon } from "@/stores/Common"
 import { useRouter } from "vue-router"
+import LoginRegister from "@/components/user/Login&Register.vue"
 const message = useMessage()
 const common = useCommon()
 const router = useRouter()
@@ -58,16 +59,7 @@ async function LoginAction() {
     >
       登录
     </n-button>
-    <div style="display: flex; gap: var(--gap)">
-      <n-button
-        block
-        style="width: 47%"
-        @click="$router.push('/user/register')"
-      >
-        注册
-      </n-button>
-      <n-button block style="width: 47%">找回密码</n-button>
-    </div>
+    <LoginRegister />
   </n-space>
 </template>
 

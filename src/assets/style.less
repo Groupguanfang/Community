@@ -6,6 +6,7 @@
   --shadowTop: var(--shadow);
   --tranOut: cubic-bezier(0.42, 0, 0.08, 2.07) 0.6s;
   --tranIn: ease-in-out 0.05s;
+  --gap: @gap;
 }
 
 .padding {
@@ -52,4 +53,18 @@ body {
 
 .n-button.no-radius {
   border-radius: 0 !important;
+}
+
+.esp {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.espOneLine {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

@@ -14,15 +14,18 @@ import {
   NDrawer,
   NGi,
   NGrid,
+  NCard,
+  NH3,
 } from "naive-ui"
 import { useCommon } from "@/stores/Common"
 import { useRouter } from "vue-router"
-import { GetUserInfo } from "lightning-community"
-import { onMounted, ref } from "vue"
+import { GetUserInfo, GetUserPost } from "lightning-community"
+import { onMounted, ref, type Ref } from "vue"
 import Avatar from "@/assets/appleIcon/Avatar.vue"
 import { MoreHorizontal16Filled, Settings20Regular } from "@vicons/fluent"
 import ActionButton from "@/components/user/ActionButton.vue"
 import StaticNumber from "@/components/user/StaticNumber.vue"
+import MyPostItem from "@/components/user/MyPostItem.vue"
 const common = useCommon()
 const router = useRouter()
 const message = useMessage()
@@ -40,12 +43,23 @@ const info = ref({
     saying: "加载中",
   },
 })
+const posts: Ref<
+  Array<{
+    title: string
+    data: string
+    poster: string
+    date: string
+  }>
+> = ref([])
 onMounted(async () => {
   const request = await GetUserInfo(<string>common.user.token)
+  const postRequest = await GetUserPost(common.user.id)
+  console.log(postRequest)
   console.log(request)
   // @ts-ignore
   // TS知识不足实在是没法解决这个报错了烦死了 懒得改了
   info.value = request
+  posts.value = postRequest.data
 })
 
 // Drawer
@@ -138,7 +152,15 @@ const tabsValue = ref("文章")
       />
     </n-space>
     <n-tabs type="segment" v-model:value="tabsValue">
-      <n-tab-pane name="文章"></n-tab-pane>
+      <n-tab-pane name="文章">
+        <MyPostItem
+          v-for="(item, index) in posts"
+          :key="index"
+          :title="item.title"
+          :data="item.data"
+          :date="item.date"
+        />
+      </n-tab-pane>
       <n-tab-pane name="关注"></n-tab-pane>
       <n-tab-pane name="粉丝"></n-tab-pane>
     </n-tabs>

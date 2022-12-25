@@ -16,6 +16,7 @@ const theme = useThemeVars()
     justify="space-around"
     :style="{
       background: theme.bodyColor,
+      zIndex: 999,
     }"
   >
     <n-icon :size="30" @click="$router.push('/')">

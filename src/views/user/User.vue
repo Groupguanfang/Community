@@ -4,6 +4,7 @@ import {
   NButton,
   NSpace,
   useMessage,
+  useDialog,
   NThing,
   NAvatar,
   NTag,
@@ -23,7 +24,7 @@ import {
 } from "@vicons/fluent"
 import { useCommon } from "@/stores/Common"
 import { useRouter } from "vue-router"
-import { GetUserInfo, GetUserPost } from "lightning-community"
+import { GetUserInfo, GetUserPost, DeletePost } from "lightning-community"
 import { onMounted, ref, type Ref } from "vue"
 import Avatar from "@/assets/appleIcon/Avatar.vue"
 import ActionButton from "@/components/user/ActionButton.vue"
@@ -33,6 +34,7 @@ import Status from "@/components/common/Status.vue"
 const common = useCommon()
 const router = useRouter()
 const message = useMessage()
+const dialog = useDialog()
 
 // 如果未登录则跳转到登录页
 if (JSON.stringify(common.user) === "{}") {
@@ -58,11 +60,12 @@ const posts: Ref<
 > = ref([])
 onMounted(async () => {
   const request = await GetUserInfo(<string>common.user.token)
-  const postRequest = await GetUserPost(common.user.id)
+  const postRequest = await GetUserPost(<number>common.user.id)
   if (request.code !== 500) {
+    // TS知识不够懒得改了老子直接ignore
     // @ts-ignore
-    // TS知识不足实在是没法解决这个报错了烦死了 懒得改了
     info.value = request
+    // @ts-ignore
     posts.value = postRequest.data
   } else {
     message.error(request.message)
@@ -81,6 +84,34 @@ function logout() {
 
 // Tabs
 const tabsValue = ref("文章")
+function deleteConfim(id: string | number) {
+  dialog.warning({
+    title: "警告",
+    content: "确认删除该文章？请三思！",
+    positiveText: "确定",
+    negativeText: "手滑了",
+    onPositiveClick: (): Promise<any> => {
+      return new Promise(async (resolve, reject) => {
+        const deleter = await DeletePost(id)
+        if (deleter.code === 200) {
+          const newData = await GetUserPost(<number>common.user.id)
+          if (newData.code !== 500) {
+            // TS知识不够懒得改了老子直接ignore
+            // @ts-ignore
+            posts.value = newData.data
+          } else {
+            message.error(newData.message)
+            common.logout()
+            router.push("/")
+          }
+          message.success("删除成功")
+        } else {
+          message.error("删除失败")
+        }
+      })
+    },
+  })
+}
 </script>
 
 <template>
@@ -172,7 +203,12 @@ const tabsValue = ref("文章")
         >
           <n-space justify="space-between">
             <Status :status="item.status" />
-            <n-button size="small" type="error" circle>
+            <n-button
+              size="small"
+              type="error"
+              circle
+              @click="deleteConfim(item.id)"
+            >
               <template #icon>
                 <n-icon>
                   <Delete20Regular />
@@ -181,7 +217,6 @@ const tabsValue = ref("文章")
             </n-button>
           </n-space>
         </MyPostItem>
-
         <n-empty v-if="posts.length === 0" />
       </n-tab-pane>
       <n-tab-pane name="关注">

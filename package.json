@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check build-only",
+    "build": "run-p typeCheck buildOnly",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --config .prettierrc.json --write * ",
@@ -43,7 +43,7 @@
     "clipboard-copy": "^4.0.1",
     "eruda": "^2.9.1",
     "less": "^4.1.3",
-    "lightning-community": "^0.2.13",
+    "lightning-community": "^0.2.14",
     "md-editor-v3": "^2.6.0",
     "naive-ui": "^2.34.2",
     "pinia": "^2.0.28",

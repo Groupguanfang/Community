@@ -1,7 +1,17 @@
 <template>
-<svg viewBox="0 0 49 52" direction='ltr' xmlns='http://www.w3.org/2000/svg' version='1.1'>
-<g fill-rule='nonzero' transform='scale(1,-1) translate(0,-52.400390625)'>
-<path fill='currentColor' stroke='currentColor' fill-opacity='1.0' stroke-width='1.0' d='
+  <svg
+    viewBox="0 0 49 52"
+    direction="ltr"
+    xmlns="http://www.w3.org/2000/svg"
+    version="1.1"
+  >
+    <g fill-rule="nonzero" transform="scale(1,-1) translate(0,-52.400390625)">
+      <path
+        fill="currentColor"
+        stroke="currentColor"
+        fill-opacity="1.0"
+        stroke-width="1.0"
+        d="
     M 24.6640625,5.37109375
     C 36.115234375,5.37109375 45.482421875,14.73828125 45.482421875,26.2109375
     C 45.482421875,37.662109375 36.115234375,47.029296875 24.6640625,47.029296875
@@ -23,7 +33,8 @@
     C 23.203125,28.853515625 22.04296875,27.693359375 22.04296875,26.232421875
     C 22.04296875,24.771484375 23.203125,23.58984375 24.6640625,23.58984375
     Z
-' />
-</g>
-</svg>
+"
+      />
+    </g>
+  </svg>
 </template>

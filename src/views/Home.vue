@@ -1,10 +1,18 @@
 <script lang="ts" setup>
-import { NSpace, NH1, NCarousel, NText, NGrid, NGi } from "naive-ui"
+import { ref } from "vue"
+import { GetAnnouncement } from "lightning-community"
+import { NSpace, NH1, NCarousel, NText, NGrid, NGi, NAlert } from "naive-ui"
 import Footer from "@/components/common/Footer.vue"
+
+const notice = ref("公告正在奋力加载中...")
+;(async () => {
+  const request = await GetAnnouncement()
+  notice.value = request.data
+})()
 </script>
 
 <template>
-  <n-space id="home" class="margin">
+  <n-space id="home" class="margin" vertical>
     <n-space vertical :size="0">
       <Footer />
       <n-text strong depth="3">
@@ -28,6 +36,8 @@ import Footer from "@/components/common/Footer.vue"
         src="//naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg"
       />
     </n-carousel>
+
+    <n-alert type="info" :title="notice" />
 
     <n-grid :x-gap="35" class="App" :cols="4">
       <n-gi @click="$router.push('/apps/bilibili')">

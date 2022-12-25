@@ -65,6 +65,14 @@ const router = createRouter({
         title: "注册",
       },
     },
+    {
+      path: "/post/:id",
+      name: "postsingle",
+      component: () => import("@/views/PostSingle.vue"),
+      meta: {
+        title: "文章详情",
+      },
+    },
   ],
 })
 

@@ -3,7 +3,7 @@
 :root {
   --gap: @gap;
   --shadow: 0 10px 20px #88888850;
-  --shadowTop: 0 -10px 20px #88888850;
+  --shadowTop: var(--shadow);
   --tranOut: cubic-bezier(0.42, 0, 0.08, 2.07) 0.6s;
   --tranIn: ease-in-out 0.05s;
 }
@@ -37,4 +37,19 @@ body {
     --shadow: 0 10px 20px #33333350;
     --shadowTop: 0 -10px 20px #22222250;
   }
+}
+
+.n-tabs-tab:active,
+.n-carousel__arrow:active {
+  transform: scale(0.95) !important;
+  transition: var(--tranIn) !important;
+}
+
+.n-tabs-tab,
+.n-carousel__arrow {
+  transition: var(--tranOut) !important;
+}
+
+.n-button.no-radius {
+  border-radius: 0 !important;
 }

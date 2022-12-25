@@ -1,7 +1,8 @@
 import { defineStore } from "pinia"
+import type { TypeCommonStore } from "@/types/TypeStores"
 
 export const useCommon = defineStore("common", {
-  state: () => {
+  state: (): TypeCommonStore => {
     return {
       user: {},
     }

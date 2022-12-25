@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { defineProps } from "vue"
-import { NSpace, NIcon } from "naive-ui"
+import { NSpace, NIcon, NText } from "naive-ui"
 defineProps({
   title: {
     type: String,

@@ -19,7 +19,7 @@ defineProps({
       </n-text>
     </n-space>
     <n-element tag="div" class="main-container">
-      <img :src="poster ? poster : 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'" />
+      <img :src="poster" v-if="poster" />
       <n-space vertical>
         <n-text class="esp">
           {{ data }}

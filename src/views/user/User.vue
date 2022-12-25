@@ -14,18 +14,22 @@ import {
   NDrawer,
   NGi,
   NGrid,
-  NCard,
-  NH3,
+  NEmpty,
 } from "naive-ui"
+import {
+  MoreHorizontal16Filled,
+  Settings20Regular,
+  Delete20Regular,
+} from "@vicons/fluent"
 import { useCommon } from "@/stores/Common"
 import { useRouter } from "vue-router"
 import { GetUserInfo, GetUserPost } from "lightning-community"
 import { onMounted, ref, type Ref } from "vue"
 import Avatar from "@/assets/appleIcon/Avatar.vue"
-import { MoreHorizontal16Filled, Settings20Regular } from "@vicons/fluent"
 import ActionButton from "@/components/user/ActionButton.vue"
 import StaticNumber from "@/components/user/StaticNumber.vue"
 import MyPostItem from "@/components/user/MyPostItem.vue"
+import Status from "@/components/common/Status.vue"
 const common = useCommon()
 const router = useRouter()
 const message = useMessage()
@@ -49,17 +53,22 @@ const posts: Ref<
     data: string
     poster: string
     date: string
+    status: string
   }>
 > = ref([])
 onMounted(async () => {
   const request = await GetUserInfo(<string>common.user.token)
   const postRequest = await GetUserPost(common.user.id)
-  console.log(postRequest)
-  console.log(request)
-  // @ts-ignore
-  // TS知识不足实在是没法解决这个报错了烦死了 懒得改了
-  info.value = request
-  posts.value = postRequest.data
+  if (request.code !== 500) {
+    // @ts-ignore
+    // TS知识不足实在是没法解决这个报错了烦死了 懒得改了
+    info.value = request
+    posts.value = postRequest.data
+  } else {
+    message.error(request.message)
+    common.logout()
+    router.push("/")
+  }
 })
 
 // Drawer
@@ -159,10 +168,28 @@ const tabsValue = ref("文章")
           :title="item.title"
           :data="item.data"
           :date="item.date"
-        />
+          :poster="item.poster"
+        >
+          <n-space justify="space-between">
+            <Status :status="item.status" />
+            <n-button size="small" type="error" circle>
+              <template #icon>
+                <n-icon>
+                  <Delete20Regular />
+                </n-icon>
+              </template>
+            </n-button>
+          </n-space>
+        </MyPostItem>
+
+        <n-empty v-if="posts.length === 0" />
       </n-tab-pane>
-      <n-tab-pane name="关注"></n-tab-pane>
-      <n-tab-pane name="粉丝"></n-tab-pane>
+      <n-tab-pane name="关注">
+        <n-empty />
+      </n-tab-pane>
+      <n-tab-pane name="粉丝">
+        <n-empty />
+      </n-tab-pane>
     </n-tabs>
   </n-space>
 </template>

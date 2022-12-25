@@ -6,23 +6,25 @@ defineProps({
   data: String,
   title: String,
   date: String,
+  poster: String
 })
 </script>
 
 <template>
   <n-card content-style="padding: var(--gap)">
-    <n-space justify="space-between">
-      <n-h3>{{ title }}</n-h3>
+    <n-space justify="space-between" align="center" style="margin-bottom: var(--gap)">
+      <n-h3 style="margin: 0">{{ title }}</n-h3>
       <n-text>
         {{ parseTime(<string>date) }}
       </n-text>
     </n-space>
     <n-element tag="div" class="main-container">
-      <img src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg" />
+      <img :src="poster ? poster : 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'" />
       <n-space vertical>
         <n-text class="esp">
           {{ data }}
         </n-text>
+        <slot />
       </n-space>
     </n-element>
   </n-card>

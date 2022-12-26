@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Footer from "@/components/common/Footer.vue"
+import Skeleton from "@/skeletons/UserSkeleton.vue"
 import {
   NButton,
   NSpace,
@@ -42,6 +43,7 @@ if (JSON.stringify(common.user) === "{}") {
   router.push("/user/login")
 }
 
+const loading = ref(true)
 const info = ref({
   data: {
     name: "加载中",
@@ -67,6 +69,7 @@ onMounted(async () => {
     info.value = request
     // @ts-ignore
     posts.value = postRequest.data
+    loading.value = false
   } else {
     message.error(request.message)
     common.logout()
@@ -140,8 +143,9 @@ function deleteConfim(id: string | number) {
       </n-button>
     </n-drawer>
 
+    <Skeleton v-if="loading" />
     <!-- 主要内容 -->
-    <n-thing :title="info.data.name">
+    <n-thing v-if="!loading" :title="info.data.name">
       <template #avatar>
         <n-avatar :size="50">
           <n-icon :size="25"><Avatar /></n-icon>
@@ -171,7 +175,7 @@ function deleteConfim(id: string | number) {
       </template>
     </n-thing>
 
-    <n-space justify="space-around">
+    <n-space v-if="!loading" justify="space-around">
       <StaticNumber
         vertical
         title="文章"
@@ -191,7 +195,8 @@ function deleteConfim(id: string | number) {
         @click="tabsValue = '粉丝'"
       />
     </n-space>
-    <n-tabs type="segment" v-model:value="tabsValue">
+
+    <n-tabs v-if="!loading" type="segment" v-model:value="tabsValue">
       <n-tab-pane name="文章">
         <MyPostItem
           v-for="(item, index) in posts"

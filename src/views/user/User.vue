@@ -22,6 +22,7 @@ import {
   MoreHorizontal16Filled,
   Settings20Regular,
   Delete20Regular,
+  SignOut24Regular
 } from "@vicons/fluent"
 import { useCommon } from "@/stores/Common"
 import { useRouter } from "vue-router"
@@ -126,15 +127,15 @@ function deleteConfim(id: string | number) {
         <n-gi>
           <ActionButton title="登出" @click="logout">
             <template #icon>
-              <Settings20Regular />
+              <SignOut24Regular />
             </template>
           </ActionButton>
         </n-gi>
       </n-grid>
       <n-button
         block
-        quaternary
         ghost
+        :bordered="false"
         size="large"
         class="no-radius"
         @click="isOpen = false"

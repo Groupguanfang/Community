@@ -1,46 +1,54 @@
-# community
+# 心电社区前端项目
 
-This template should help get you started developing with Vue 3 in Vite.
+![Project Version](https://img.shields.io/github/package-json/v/groupguanfang/Community?color=red&filename=package.json&label=Project%20Version&logo=npm)
+![Last Commit](https://img.shields.io/github/last-commit/LightningLion-Studio/Vue3?color=blue&logo=github&label=Last%20Cimmit)
+![Code size](https://img.shields.io/github/languages/code-size/groupguanfang/Community?logo=javascript&label=Code%20Size)
+![Files Count](https://img.shields.io/github/directory-file-count/groupguanfang/Community?color=green&logo=files&label=Files)
+![License](https://img.shields.io/badge/License-Apache-red)
+![Pull Requests Closed](https://img.shields.io/github/issues-pr-closed/groupguanfang/Community?logo=github&label=Pull%20Requests)
 
-## Recommended IDE Setup
+## 运行
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+必须装有 Node.js 环境且安装了 Yarn。
 
-## Type Support for `.vue` Imports in TS
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (并且关闭 Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin)。
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+## 自定义配置
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+阅读 [Vite Configuration Reference](https://vitejs.dev/config/)。
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
+##启动项目
 
 ```sh
-npm install
+npm i
 ```
 
-### Compile and Hot-Reload for Development
+### 本地运行
 
 ```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+### 打包编译
 
 ```sh
-npm run build
+npm run buildOnly
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+### 格式化
 
 ```sh
-npm run lint
+npm run format
+```
+
+### API 升级
+
+```sh
+npm run apiUpdate
+```
+
+### TypeScript检查
+
+```
+npm run typeCheck
 ```

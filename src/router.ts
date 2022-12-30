@@ -73,6 +73,14 @@ const router = createRouter({
         title: "文章详情",
       },
     },
+    {
+      path: "/about",
+      name: "about",
+      component: () => import("@/views/About.vue"),
+      meta: {
+        title: "QWQ"
+      }
+    },
   ],
 })
 

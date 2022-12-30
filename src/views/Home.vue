@@ -18,7 +18,7 @@ const notice = ref("公告正在奋力加载中...")
       <n-text strong depth="3">
         {{ new Date().getMonth() }}月{{ new Date().getDate() }}日
       </n-text>
-      <n-h1 strong style="margin-top: 0; margin-bottom: 0; font-weight: bold">
+      <n-h1 strong style="margin-top: 0; margin-bottom: 0; font-weight: bold" @click="$router.push('/about')">
         心电社区
       </n-h1>
     </n-space>

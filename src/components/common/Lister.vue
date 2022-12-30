@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { NListItem, NThing, NIcon, NSpace, NAvatar, NButton } from "naive-ui"
+import { NListItem, NThing, NIcon, NSpace, NAvatar, NButton, NNumberAnimation } from "naive-ui"
 import {
   ThumbLike20Regular,
-  ThumbDislike20Regular,
+  ThumbLike20Filled,
   Comment20Regular,
   Person20Regular,
 } from "@vicons/fluent"
@@ -13,6 +13,11 @@ export default {
   props: {
     title: String,
     description: String,
+    isLike: Boolean,
+    likeCount: {
+      type: Number,
+      default: () => 0
+    }
   },
 }
 </script>
@@ -35,22 +40,20 @@ export default {
         <n-space justify="space-between">
           <div class="left">
             <n-space>
-              <n-button circle>
-                <n-icon size="large">
-                  <ThumbLike20Regular />
-                </n-icon>
-              </n-button>
-              <n-button circle>
-                <n-icon size="large">
-                  <ThumbDislike20Regular />
-                </n-icon>
+              <n-button :type="isLike ? 'primary' : 'default'" size="small" round>
+                <template #icon>
+                  <n-icon size="medium">
+                    <ThumbLike20Regular />
+                  </n-icon>
+                </template>
+                <n-number-animation :from="0" :to="likeCount" />
               </n-button>
             </n-space>
           </div>
           <div class="right">
             <n-space>
-              <n-button circle>
-                <n-icon size="large">
+              <n-button size="small" circle>
+                <n-icon>
                   <Comment20Regular />
                 </n-icon>
               </n-button>

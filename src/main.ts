@@ -12,8 +12,5 @@ const app = createApp(App)
 app.use(createPinia().use(piniaPersist))
 app.use(router)
 
-app.mount("#app");
-
-(async function main() {
-  await PostPV()
-})()
+app.mount("#app")
+PostPV()

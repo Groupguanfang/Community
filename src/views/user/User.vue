@@ -17,6 +17,7 @@ import {
   NGi,
   NGrid,
   NEmpty,
+  NCard,
 } from "naive-ui"
 import {
   MoreHorizontal16Filled,
@@ -25,9 +26,14 @@ import {
   SignOut24Regular,
   Add16Filled,
 } from "@vicons/fluent"
+import {
+  GetUserInfo,
+  GetUserPost,
+  DeletePost,
+  GetUserTopic,
+} from "lightning-community"
 import { useCommon } from "@/stores/Common"
 import { useRouter } from "vue-router"
-import { GetUserInfo, GetUserPost, DeletePost } from "lightning-community"
 import { onMounted, ref, type Ref } from "vue"
 import Avatar from "@/assets/appleIcon/Avatar.vue"
 import ActionButton from "@/components/user/ActionButton.vue"
@@ -60,11 +66,22 @@ const posts: Ref<
     poster: string
     date: string
     status: string
+    id: number
+  }>
+> = ref([])
+const topics: Ref<
+  Array<{
+    data: string
+    date: string
   }>
 > = ref([])
 onMounted(async () => {
   const request = await GetUserInfo(<string>common.user.token)
   const postRequest = await GetUserPost(
+    <number>common.user.id,
+    common.user.token,
+  )
+  const topicRequest = await GetUserTopic(
     <number>common.user.id,
     common.user.token,
   )
@@ -74,6 +91,7 @@ onMounted(async () => {
     info.value = request
     // @ts-ignore
     posts.value = postRequest.data
+    topics.value = topicRequest.data
     loading.value = false
   } else {
     message.error(request.message)
@@ -90,7 +108,7 @@ function logout() {
   router.push("/")
 }
 
-// Tabs
+// 文章tab
 const tabsValue = ref("文章")
 function deleteConfim(id: string | number) {
   let d = dialog.warning({
@@ -126,6 +144,8 @@ function deleteConfim(id: string | number) {
     },
   })
 }
+
+// 帖子tab
 </script>
 
 <template>
@@ -252,6 +272,15 @@ function deleteConfim(id: string | number) {
           </MyPostItem>
         </n-space>
         <n-empty v-if="posts.length === 0" />
+      </n-tab-pane>
+      <n-tab-pane name="帖子">
+        <n-space>
+          <n-card v-for="(item, index) in topics" :key="index">
+            {{ item.data }}
+            {{ item.date }}
+          </n-card>
+        </n-space>
+        <n-empty v-if="topics.length === 0" />
       </n-tab-pane>
       <n-tab-pane name="关注">
         <n-empty />

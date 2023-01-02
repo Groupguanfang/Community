@@ -24,7 +24,7 @@ defineProps({
     </n-space>
     <n-element tag="div" class="main-container">
       <img :src="poster" v-if="poster" />
-      <n-space vertical>
+      <n-space vertical style="width: 100%">
         <div class="esp">
           {{ data }}
         </div>

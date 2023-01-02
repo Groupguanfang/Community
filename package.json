@@ -39,11 +39,12 @@
   },
   "dependencies": {
     "@vicons/fluent": "^0.12.0",
+    "@vueuse/core": "^9.9.0",
     "axios": "^1.2.1",
     "clipboard-copy": "^4.0.1",
     "eruda": "^2.9.1",
     "less": "^4.1.3",
-    "lightning-community": "^0.2.30",
+    "lightning-community": "^0.2.31",
     "md-editor-v3": "^2.6.0",
     "naive-ui": "^2.34.2",
     "pinia": "^2.0.28",

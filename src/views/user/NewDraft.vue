@@ -6,11 +6,14 @@ import {
   NButtonGroup,
   NButton,
   useOsTheme,
-  NA,
   NSpace,
   NInput,
-  NH4,
+  NCheckbox,
+  NA,
+  NText,
+  NIcon,
 } from "naive-ui"
+import { Delete16Regular } from "@vicons/fluent"
 import MdEditor from "md-editor-v3"
 import { empty } from "@/utils/Empty"
 import "md-editor-v3/lib/style.css"
@@ -23,11 +26,13 @@ const editor = MdEditor
 const theme: Ref<any> = useOsTheme()
 const message = useMessage()
 const common = useCommon()
+
 const title = ref("")
 const text = ref("")
 const category = ref(1)
 const categorys = ref([])
 const id = ref(undefined)
+const isAccepted = ref(false)
 
 async function save() {
   if (empty(title.value, text.value)) {
@@ -75,6 +80,17 @@ function upload(files: Array<any>, callback: Function) {
     })
 }
 
+async function putToCheck() {
+  if (!isAccepted.value) {
+    message.warning("请同意社区规定")
+    return
+  }
+  if (empty(id.value)) {
+    message.warning("请先点击保存，再提交审核")
+    return
+  }
+}
+
 onMounted(async () => {
   fixEditor()
   let cate = await GetCateogry(999, 0)
@@ -102,20 +118,45 @@ onMounted(async () => {
       v-model="text"
     />
 
-    <div style="display: flex; gap: 7px">
-      <n-button-group size="large" vertical>
-        <n-button type="primary" block @click="save()"> 保存 </n-button>
-        <n-button>提交审核</n-button>
-      </n-button-group>
+    <n-button size="large" block type="primary" @click="save()">
+      保存
+    </n-button>
 
-      <n-h4>分类</n-h4>
-      <n-select v-model:value="category" :options="categorys" />
+    <div class="check">
+      <n-button style="width: 86%" block size="large" @click="putToCheck">
+        提交审核
+      </n-button>
+      <n-button circle>
+        <template #icon>
+          <n-icon :component="Delete16Regular" />
+        </template>
+      </n-button>
     </div>
+
+    <n-space>
+      <n-checkbox size="large" v-model:checked="isAccepted" />
+      <n-text style="word-wrap: break-word">
+        确保您已经详细阅读了<router-link
+          to="/post/1"
+          #="{ navigate, href }"
+          custom
+        >
+          <n-a :href="href" @click="navigate">社区规定</n-a>
+        </router-link>
+      </n-text>
+    </n-space>
+    <n-select size="large" v-model:value="category" :options="categorys" />
   </n-space>
 </template>
 
 <style lang="less" scoped>
 .gap {
   margin: 10px;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 </style>

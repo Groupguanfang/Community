@@ -23,7 +23,7 @@ import {
   Settings20Regular,
   Delete20Regular,
   SignOut24Regular,
-  Add16Filled
+  Add16Filled,
 } from "@vicons/fluent"
 import { useCommon } from "@/stores/Common"
 import { useRouter } from "vue-router"
@@ -64,7 +64,10 @@ const posts: Ref<
 > = ref([])
 onMounted(async () => {
   const request = await GetUserInfo(<string>common.user.token)
-  const postRequest = await GetUserPost(<number>common.user.id,common.user.token)
+  const postRequest = await GetUserPost(
+    <number>common.user.id,
+    common.user.token,
+  )
   if (request.code !== 500) {
     // TS知识不够懒得改了老子直接ignore
     // @ts-ignore
@@ -98,9 +101,12 @@ function deleteConfim(id: string | number) {
     onPositiveClick: (): Promise<any> => {
       return new Promise(async (resolve, reject) => {
         d.loading = true
-        const deleter = await DeletePost(common.user.token, 'post', id)
+        const deleter = await DeletePost(common.user.token, "post", id)
         if (deleter.code === 200) {
-          const newData = await GetUserPost(<number>common.user.id,common.user.token)
+          const newData = await GetUserPost(
+            <number>common.user.id,
+            common.user.token,
+          )
           if (newData.code !== 500) {
             // TS知识不够懒得改了老子直接ignore
             // @ts-ignore
@@ -207,38 +213,43 @@ function deleteConfim(id: string | number) {
 
     <n-tabs v-if="!loading" type="segment" v-model:value="tabsValue">
       <n-tab-pane name="文章">
-        <n-button style="margin-bottom: 14px" dashed block @click="$router.push('/user/newdraft')">
+        <n-button
+          dashed
+          block
+          class="newDraft"
+          @click="$router.push('/user/newdraft')"
+        >
           <template #icon>
             <n-icon :component="Add16Filled" />
           </template>
           新建
         </n-button>
-        
-        <n-space vertical style="margin-bottom: 30px">
-        <MyPostItem
-          v-for="(item, index) in posts"
-          :key="index"
-          :title="item.title"
-          :data="item.data"
-          :date="item.date"
-          :poster="item.poster"
-        >
-          <n-space justify="space-between">
-            <Status :status="item.status" />
-            <n-button
-              size="small"
-              type="error"
-              circle
-              @click="deleteConfim(item.id)"
-            >
-              <template #icon>
-                <n-icon>
-                  <Delete20Regular />
-                </n-icon>
-              </template>
-            </n-button>
-          </n-space>
-        </MyPostItem>
+
+        <n-space size="large" vertical style="margin-bottom: 30px">
+          <MyPostItem
+            v-for="(item, index) in posts"
+            :key="index"
+            :title="item.title"
+            :data="item.data"
+            :date="item.date"
+            :poster="item.poster"
+          >
+            <n-space justify="space-between">
+              <Status :status="item.status" />
+              <n-button
+                size="small"
+                type="error"
+                circle
+                @click="deleteConfim(item.id)"
+              >
+                <template #icon>
+                  <n-icon>
+                    <Delete20Regular />
+                  </n-icon>
+                </template>
+              </n-button>
+            </n-space>
+          </MyPostItem>
         </n-space>
         <n-empty v-if="posts.length === 0" />
       </n-tab-pane>
@@ -251,3 +262,9 @@ function deleteConfim(id: string | number) {
     </n-tabs>
   </n-space>
 </template>
+
+<style lang="less" scoped>
+.newDraft {
+  margin-bottom: 12px;
+}
+</style>

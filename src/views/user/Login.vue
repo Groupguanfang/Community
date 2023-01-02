@@ -22,7 +22,6 @@ if (JSON.stringify(common.user) !== "{}") {
 async function LoginAction() {
   loading.value = true
   const data = await Login(username.value, password.value)
-  console.log(data)
   if (data.code !== 200) {
     message.error(data.message)
   } else {

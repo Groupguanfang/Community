@@ -81,6 +81,14 @@ const router = createRouter({
         title: "QWQ"
       }
     },
+    {
+      path: "/user/media",
+      name: "about",
+      component: () => import("@/views/user/Media.vue"),
+      meta: {
+        title: "媒体库"
+      }
+    }
   ],
 })
 

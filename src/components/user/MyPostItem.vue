@@ -25,9 +25,9 @@ defineProps({
     <n-element tag="div" class="main-container">
       <img :src="poster" v-if="poster" />
       <n-space vertical>
-        <n-text class="esp">
+        <div class="esp">
           {{ data }}
-        </n-text>
+        </div>
         <slot />
       </n-space>
     </n-element>
@@ -42,5 +42,8 @@ img {
 .main-container {
   display: flex;
   gap: var(--gap);
+}
+.esp {
+  width: 100%;
 }
 </style>

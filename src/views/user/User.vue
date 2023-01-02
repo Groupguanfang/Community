@@ -22,7 +22,8 @@ import {
   MoreHorizontal16Filled,
   Settings20Regular,
   Delete20Regular,
-  SignOut24Regular
+  SignOut24Regular,
+  Add16Filled
 } from "@vicons/fluent"
 import { useCommon } from "@/stores/Common"
 import { useRouter } from "vue-router"
@@ -63,7 +64,7 @@ const posts: Ref<
 > = ref([])
 onMounted(async () => {
   const request = await GetUserInfo(<string>common.user.token)
-  const postRequest = await GetUserPost(<number>common.user.id)
+  const postRequest = await GetUserPost(<number>common.user.id,common.user.token)
   if (request.code !== 500) {
     // TS知识不够懒得改了老子直接ignore
     // @ts-ignore
@@ -89,16 +90,17 @@ function logout() {
 // Tabs
 const tabsValue = ref("文章")
 function deleteConfim(id: string | number) {
-  dialog.warning({
+  let d = dialog.warning({
     title: "警告",
     content: "确认删除该文章？请三思！",
     positiveText: "确定",
     negativeText: "手滑了",
     onPositiveClick: (): Promise<any> => {
       return new Promise(async (resolve, reject) => {
-        const deleter = await DeletePost(id)
+        d.loading = true
+        const deleter = await DeletePost(common.user.token, 'post', id)
         if (deleter.code === 200) {
-          const newData = await GetUserPost(<number>common.user.id)
+          const newData = await GetUserPost(<number>common.user.id,common.user.token)
           if (newData.code !== 500) {
             // TS知识不够懒得改了老子直接ignore
             // @ts-ignore
@@ -108,9 +110,11 @@ function deleteConfim(id: string | number) {
             common.logout()
             router.push("/")
           }
-          message.success("删除成功")
+          message.success(deleter.message)
+          resolve(deleter)
         } else {
-          message.error("删除失败")
+          message.error(deleter.message)
+          reject(deleter)
         }
       })
     },
@@ -149,12 +153,16 @@ function deleteConfim(id: string | number) {
     <n-thing v-if="!loading" :title="info.data.name">
       <template #avatar>
         <n-avatar :size="50">
-          <n-icon :size="25"><Avatar /></n-icon>
+          <n-icon :size="25">
+            <Avatar />
+          </n-icon>
         </n-avatar>
       </template>
       <template #header-extra>
         <n-button size="large" text @click="isOpen = true">
-          <n-icon :size="20"><MoreHorizontal16Filled /></n-icon>
+          <n-icon :size="20">
+            <MoreHorizontal16Filled />
+          </n-icon>
         </n-button>
       </template>
       <template #description>
@@ -199,6 +207,14 @@ function deleteConfim(id: string | number) {
 
     <n-tabs v-if="!loading" type="segment" v-model:value="tabsValue">
       <n-tab-pane name="文章">
+        <n-button style="margin-bottom: 14px" dashed block @click="$router.push('/user/newdraft')">
+          <template #icon>
+            <n-icon :component="Add16Filled" />
+          </template>
+          新建
+        </n-button>
+        
+        <n-space vertical style="margin-bottom: 30px">
         <MyPostItem
           v-for="(item, index) in posts"
           :key="index"
@@ -223,6 +239,7 @@ function deleteConfim(id: string | number) {
             </n-button>
           </n-space>
         </MyPostItem>
+        </n-space>
         <n-empty v-if="posts.length === 0" />
       </n-tab-pane>
       <n-tab-pane name="关注">

@@ -1,5 +1,5 @@
 import type { GlobalThemeOverrides } from "naive-ui"
-const ThemeConfig: GlobalThemeOverrides = {
+export const ThemeConfig: GlobalThemeOverrides = {
   common: {
     primaryColor: "#F94646FF",
     primaryColorHover: "#D6812CFF",
@@ -19,5 +19,34 @@ const ThemeConfig: GlobalThemeOverrides = {
     borderRadiusSmall: "5px",
   },
 }
+
+export const tools: Array<string> = [
+  "revoke",
+  "next",
+  "-",
+  "bold",
+  "underline",
+  "italic",
+  "image",
+  "-",
+  "strikeThrough",
+  "title",
+  "sub",
+  "sup",
+  "quote",
+  "unorderedList",
+  "orderedList",
+  "-",
+  "codeRow",
+  "code",
+  "link",
+  "table",
+  "=",
+  "pageFullscreen",
+  "fullscreen",
+  "preview",
+  "htmlPreview",
+  "catalog",
+]
 
 export default ThemeConfig

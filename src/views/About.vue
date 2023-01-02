@@ -22,16 +22,56 @@ const mounted = (async () => {
       </n-text>
     </n-space>
     <n-space vertical>
-      <n-h2 prefix="bar">Using</n-h2>
-      <n-grid :x-gap="8" :y-gap="12" :cols="2">
+      <n-h2 class="e" prefix="bar">地基</n-h2>
+      <n-grid :x-gap="8" :y-gap="8" :cols="2">
         <n-gi>
-          <n-card title="Nai">
-            <n-text depth="3">Base Node</n-text>
+          <n-card embedded size="small" title="Nai">
+            <n-text depth="3">基于Express</n-text>
           </n-card>
         </n-gi>
         <n-gi>
-          <n-card title="Vue">
-            <n-text depth="3">Progressive</n-text>
+          <n-card embedded size="small" title="Vue">
+            <n-text depth="3">渐进响应式</n-text>
+          </n-card>
+        </n-gi>
+        <n-gi>
+          <n-card embedded size="small" title="Naive UI">
+            <n-text depth="3">有点意思</n-text>
+          </n-card>
+        </n-gi>
+        <n-gi>
+          <n-card embedded size="small" title="Tencent Cloud">
+            <n-text depth="3">基础服务</n-text>
+          </n-card>
+        </n-gi>
+      </n-grid>
+      
+      <n-h2 class="e" prefix="bar">股东们</n-h2>
+      <n-grid :x-gap="8" :y-gap="8" :cols="2">
+        <n-gi>
+          <n-card embedded size="small" title="闪电狮">
+            <n-text depth="3">
+              腕上系列
+            </n-text>
+          </n-card>
+        </n-gi>
+      </n-grid>
+      <n-h2 class="e" prefix="bar">
+        包工头们
+      </n-h2>
+      <n-grid :x-gap="8" :y-gap="8" :cols="2">
+        <n-gi>
+          <n-card embedded size="small" title="Zero">
+            <n-text depth="3">
+              心电社区
+            </n-text>
+          </n-card>
+        </n-gi>
+        <n-gi>
+          <n-card embedded size="small" title="邱璇洛">
+            <n-text depth="3">
+              心电社区
+            </n-text>
           </n-card>
         </n-gi>
       </n-grid>
@@ -46,5 +86,9 @@ const mounted = (async () => {
 .logo {
   border-radius: 18%;
   width: 100%;
+}
+.e {
+  margin-bottom: 5px;
+  margin-top: 20px;
 }
 </style>

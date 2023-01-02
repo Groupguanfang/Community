@@ -1,7 +1,7 @@
 export interface TypeCommonStore {
   user: {
-    id?: number
-    data?: string
-    token?: string
+    id: number | string
+    data: string
+    token: string
   }
 }

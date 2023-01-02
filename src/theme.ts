@@ -1,4 +1,5 @@
 import type { GlobalThemeOverrides } from "naive-ui"
+import type { ToolbarNames } from "md-editor-v3"
 export const ThemeConfig: GlobalThemeOverrides = {
   common: {
     primaryColor: "#F94646FF",
@@ -20,7 +21,7 @@ export const ThemeConfig: GlobalThemeOverrides = {
   },
 }
 
-export const tools: Array<string> = [
+export const tools: Array<ToolbarNames> = [
   "revoke",
   "next",
   "-",

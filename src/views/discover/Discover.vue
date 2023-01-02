@@ -72,7 +72,7 @@ onMounted(async () => {
         </n-icon>
       </n-button>
     </n-space>
-    <n-list bordered clickable hoverable>
+    <n-list bordered clickable>
       <lister
         v-for="(item, index) in data"
         :key="index"

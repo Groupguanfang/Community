@@ -1,18 +1,20 @@
 <script setup>
-import { NTag, NButton, NH1, NList, NSpace, NIcon } from "naive-ui"
+import { NDrawer, NTag, NButton, NH1, NList, NSpace, NIcon } from "naive-ui"
 import Footer from "@/components/common/Footer.vue"
 import { ref, onMounted } from "vue"
 import { Get, GetUserInfoByGuest } from "lightning-community"
 import { Add20Filled } from "@vicons/fluent"
 import lister from "@/components/common/Lister.vue"
 import { useCommon } from "@/stores/Common"
+import NewTopic from "@/components/discover/NewTopic.vue"
 const common = useCommon()
 
 const data = ref([])
 const isLikeLoading = ref(true)
+const isOpenNewTopic = ref(false)
 
+// 获取数据
 const getData = async () => {
-  // 获取数据
   const req = await Get("topic", 999, 0, 1, common.user.token)
   for (let i = 0; i < req.data.length; i++) {
     const authorData = await GetUserInfoByGuest(req.data[i].author)
@@ -23,6 +25,7 @@ const getData = async () => {
   return req
 }
 
+// 点赞
 const onLike = async id => {
   isLikeLoading.value = true
   // 重新获取数据
@@ -30,20 +33,27 @@ const onLike = async id => {
   isLikeLoading.value = false
 }
 
-const mounted = async () => {
+onMounted(async () => {
   await getData()
   // 初始化点赞数据
   for (let i = 0; i < data.value.length; i++) {
     await onLike(data.value[i].id)
   }
   isLikeLoading.value = false
-}
-onMounted(() => mounted())
+})
 </script>
 
 <template>
   <div id="discover" class="margin">
     <Footer />
+    <n-drawer
+      v-model:show="isOpenNewTopic"
+      class="new-topic"
+      height="96%"
+      placement="bottom"
+    >
+      <NewTopic />
+    </n-drawer>
     <n-space align="center" justify="space-between">
       <n-h1
         @click="$router.push('/about')"
@@ -51,7 +61,12 @@ onMounted(() => mounted())
       >
         发现
       </n-h1>
-      <n-button secondary type="primary" circle>
+      <n-button
+        @click="isOpenNewTopic = !isOpenNewTopic"
+        secondary
+        type="primary"
+        circle
+      >
         <n-icon>
           <Add20Filled />
         </n-icon>
@@ -89,4 +104,9 @@ onMounted(() => mounted())
   </div>
 </template>
 
-<style lang="less" scoped></style>
+<style lang="less">
+.new-topic {
+  border-top-left-radius: var(--radius);
+  border-top-right-radius: var(--radius);
+}
+</style>

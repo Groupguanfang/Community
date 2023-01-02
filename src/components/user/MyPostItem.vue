@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { ref, defineProps } from "vue"
 import { NCard, NElement, NH3, NText, NSpace } from "naive-ui"
 import { parseTime } from "@/utils/Timer"
 defineProps({
